@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.0"
+# ruby "2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -32,7 +32,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'money-rails'
 gem 'carrierwave'
-gem 'rmagick'
+gem 'rmagick', '2.16.0'
 gem 'stripe'
 gem 'faker'
 

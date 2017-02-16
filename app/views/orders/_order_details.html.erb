@@ -1,5 +1,5 @@
 <h3>Email: <%= @order.email %></h3>
-<% @line_items.each do |item| %>
+<% @order.line_items.each do |item| %>
   <ol>
     <li>
       <h3><%= item.product.name %></h3>
@@ -17,6 +17,6 @@
 <% end %>
 
 <h3>Order Sub-Total: <%= format_price(@order.total_cents) %></h3>
-<h3>Tax: <%= calculate_tax(@order.total_cents) %>
-</h3>
+<h3>Tax: <%= calculate_tax(@order.total_cents) %></h3>
+<h3>Order Total: <%= calculate_total(@order.total_cents) %></h3>
 <h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you for your order</h1>
+    <p>
+      Thanks for the money.
+    </p>
+    <% @order.line_items.each do |item| %>
+      <ul>
+        <li>
+          <h3><%= item.product.name %></h3>
+          <h4>Quantity: <%= item.quantity %></h4>
+          <p><%= item.product.description %></p>
+          <h3>
+            Item Price: <%= format_price(item.item_price_cents) %>
+          </h3>
+          <h3>
+            Total Price: <%= format_price(item.total_price_cents) %>
+          </h3>
+        </li>
+      </ul>
+    <% end %>
+
+    <h3>Order Sub-Total: $<%= format_price(@order.total_cents) %></h3>
+    <h3>Tax: <%= calculate_tax(@order.total_cents) %></h3>
+    <h3>Order Total: <%= calculate_total(@order.total_cents) %></h3>
+    <h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>
+  </body>
+</html>

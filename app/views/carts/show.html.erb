@@ -23,10 +23,11 @@
       <tfoot>
         <tr>
           <th colspan="4">
-            TOTAL:
+            TOTAL: <br>
+            $<%= number_with_delimiter(@cart_total * 1.13) %>
           </th>
           <th>
-            Subtotal: <%= format_price(@cart_total) %>
+            Subtotal: $<%= number_with_delimiter(@cart_total) %>
           </th>
         </tr>
       </tfoot>

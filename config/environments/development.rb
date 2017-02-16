@@ -36,6 +36,13 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # Letter Opener gem configuration
+  # Now any email will pop up in your browser instead of being sent.
+  # The messages are stored in tmp/letter_opener. If you want to change application that will
+  # be used to open your emails you should override LAUNCHY_APPLICATION environment variable or
+  # set Launchy.application in the initializer.
+  config.action_mailer.delivery_method = :letter_opener
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

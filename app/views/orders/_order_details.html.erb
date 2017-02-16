@@ -1,24 +1,22 @@
 <h3>Email: <%= @order.email %></h3>
-<h3>Order Total: <%= @order.total_cents %></h3>
-<h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>
-
-<% @products.each do |product| %>
-  <% @line_items.each do |item| %>
-  <h4>Product: <%= product.name %></h4>
-  <h4>Product ID: <%= product.id %></h4>
-  <ul>
+<% @line_items.each do |item| %>
+  <ol>
     <li>
-      <h8>Description<%= product.description %></h8>
+      <h3><%= item.product.name %></h3>
+      <div class="order-details-image"> <%= image_tag item.product.image %> </div>
+      <h4>Quantity: <%= item.quantity %></h4>
+      <p><%= item.product.description %></p>
+      <h3>
+        Individual Price: <%= format_price(item.item_price_cents) %>
+      </h3>
+      <h3>
+        Total Price: <%= format_price(item.total_price_cents) %>
+      </h3>
     </li>
-    <li>
-      <h8>Quantity: <%= item.quantity %></h8>
-    </li>
-    <li>
-      <h8>Item Price: <%= item.item_price_cents %></h8>
-    </li>
-    <li>
-      <h8>Item Total Price: <%= item.total_price_cents %></h8>
-    </li>
-  </ul>
-  <% end %>
+  </ol>
 <% end %>
+
+<h3>Order Sub-Total: <%= format_price(@order.total_cents) %></h3>
+<h3>Tax: <%= calculate_tax(@order.total_cents) %>
+</h3>
+<h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>

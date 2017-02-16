@@ -1,0 +1,24 @@
+<h3>Email: <%= @order.email %></h3>
+<h3>Order Total: <%= @order.total_cents %></h3>
+<h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>
+
+<% @products.each do |product| %>
+  <% @line_items.each do |item| %>
+  <h4>Product: <%= product.name %></h4>
+  <h4>Product ID: <%= product.id %></h4>
+  <ul>
+    <li>
+      <h8>Description<%= product.description %></h8>
+    </li>
+    <li>
+      <h8>Quantity: <%= item.quantity %></h8>
+    </li>
+    <li>
+      <h8>Item Price: <%= item.item_price_cents %></h8>
+    </li>
+    <li>
+      <h8>Item Total Price: <%= item.total_price_cents %></h8>
+    </li>
+  </ul>
+  <% end %>
+<% end %>

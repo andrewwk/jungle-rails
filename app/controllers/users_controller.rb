@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  validates :email, presence: true, uniqueness: { strict: true }
+
   def new
     user = User.new
   end

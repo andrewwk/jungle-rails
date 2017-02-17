@@ -4,6 +4,9 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if !@cart_total %>
+  <h2><%= link_to("There's nothing in your cart. Click me to start shopping", root_path) %></h2>
+  <% else %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -50,5 +53,6 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
 </section>

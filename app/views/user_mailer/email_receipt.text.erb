@@ -7,14 +7,15 @@ Stripe Charge: <%= @order.stripe_charge_id %>
 
 Your order
 ===============================================
-Items:
+
 <% @order.line_items.each do |item| %>
-  <%= item.product.name %>
-  <%= item.product.quantity %>
-  <%= format_price(item.item_price_cents) %>
+  Item:     <%= item.product.name %>
+  Price:    <%= format_price(item.item_price_cents) %>
+  Quantity: <%= item.quantity %>
+-----------------------------------------------
 <% end %>
 Sub-Total: <%= format_price(@order.total_cents) %>
-Tax: <%= calculate_tax(@order.total_cents) %>
-Total: <%= calculate_total(@order.total_cents) %>
+Tax:       <%= calculate_tax(@order.total_cents) %>
+Total:     <%= calculate_total(@order.total_cents) %>
 
-Thanks for joining and have a great day!
+Thanks for shopping with us and have a great day!

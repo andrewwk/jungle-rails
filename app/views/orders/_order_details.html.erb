@@ -1,22 +1,108 @@
-<h3>Email: <%= @order.email %></h3>
-<% @order.line_items.each do |item| %>
-  <ol>
-    <li>
-      <h3><%= item.product.name %></h3>
-      <div class="order-details-image"> <%= image_tag item.product.image %> </div>
-      <h4>Quantity: <%= item.quantity %></h4>
-      <p><%= item.product.description %></p>
-      <h3>
-        Individual Price: <%= format_price(item.item_price_cents) %>
-      </h3>
-      <h3>
-        Total Price: <%= format_price(item.total_price_cents) %>
-      </h3>
-    </li>
-  </ol>
-<% end %>
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <h2>Jungle Rails</h2>
 
-<h3>Order Sub-Total: <%= format_price(@order.total_cents) %></h3>
-<h3>Tax: <%= calculate_tax(@order.total_cents) %></h3>
-<h3>Order Total: <%= calculate_total(@order.total_cents) %></h3>
-<h3>Stripe Charge Confirmation ID: <%= @order.stripe_charge_id %></h3>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="information">
+            <td colspan="4">
+                <table>
+                    <tr>
+                        <td>
+                            Order ID:
+                            <%= @order.id %><br>
+                            <%= @order.created_at %><br>
+                            <%= @order.email %>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading">
+            <td>
+                Payment Method
+            </td>
+            <td>Confirmation Number</td>
+            <td></td>
+            <td>
+            </td>
+        </tr>
+
+        <tr class="details">
+            <td>
+                Stripe
+            </td>
+
+            <td>
+                <%= @order.stripe_charge_id %>
+            </td>
+        </tr>
+
+        <tr class="heading">
+            <td>
+                Item
+            </td>
+
+            <td>
+                Description
+            </td>
+
+
+            <td>
+                Quantity
+            </td>
+
+            <td>
+              Price
+            </td>
+        </tr>
+
+        <% @order.line_items.each do |item| %>
+        <tr class="item">
+            <td>
+                <%= item.product.name %>
+            </td>
+
+            <td>
+                <%= item.product.description %>
+                <div class="order-details-image">
+                    <%= image_tag item.product.image %>
+                </div>
+            </td>
+
+            <td>
+              <%= item.quantity %>
+            </td>
+
+            <td>
+                <%= format_price(item.item_price_cents) %>
+            </td>
+        </tr>
+        <% end %>
+        <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="4">
+                <span>Sub-Total:
+                    <%= format_price(@order.total_cents) %></span>
+                <br>
+                <span>Tax:
+                    <%= calculate_tax(@order.total_cents) %></span>
+                <br>
+                <span>Total:
+                    <%= calculate_total(@order.total_cents) %></span>
+            </td>
+        </tr>
+    </table>
+</div>

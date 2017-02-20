@@ -9,22 +9,16 @@ class User < ActiveRecord::Base
   has_many :reviews
 
   def self.authenticate_with_credentials(email, password)
-    # @email = email
-    # @password = password
+    # Remove any and all whitespace from email
+    email = email.gsub(/\s+/, "")
 
-    # if @email.valid? && @password.valid?
-      @user = self.find_by email: email
+    @user = self.find_by email: email.downcase
 
-      if @user.authenticate(password)
-        @user
-      else
-        nil
-      end
-
-    # else
-    #   nil
-    # end
-
+    if @user.authenticate(password)
+      @user
+    else
+      nil
+    end
   end
 
 end

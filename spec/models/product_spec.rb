@@ -24,6 +24,7 @@ RSpec.describe Product, type: :model do
 
     it "Should have a name" do
       expect(@product.name).to eq("Racecar Bed")
+      expect{@product.name}.to_not raise_error
     end
 
     it "Should have a valid price " do
@@ -60,9 +61,7 @@ RSpec.describe Product, type: :model do
         quantity: 100,
         category_id: 1
         })
-      expect(@product.errors.full_messages).to include("is not a number")
-      expect(@product.price_cents).to_not be_an_instance_of(Integer)
-      expect(@product.price_cents).to eq(0)
+      expect(@product.errors.full_messages).to include("Price cents is not a number")
     end
   end
 
@@ -71,11 +70,9 @@ RSpec.describe Product, type: :model do
       @product = Product.create({
         name: "jet ski",
         price_cents: 54321,
-        quantity: "House",
         category_id: 1
         })
-      expect(@product.quantity).to_not be_an_instance_of(Integer)
-      expect(@product.quantity).to eq(0)
+      expect(@product.errors.full_messages).to include("Quantity is not a number")
     end
   end
 
@@ -86,7 +83,7 @@ RSpec.describe Product, type: :model do
         price_cents: 54321,
         quantity: 123
         })
-      expect(@product.category_id).to be(nil)
+      expect(@product.errors.full_messages).to include("Category can't be blank")
     end
   end
 

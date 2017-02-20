@@ -134,3 +134,64 @@ cat3.products.create!({
 
 
 puts "DONE!"
+
+##User
+
+puts "CREATING NEW USER"
+
+user1 = User.create!({
+  name: "Andrew",
+  email: "test@test.com",
+  password: "test"
+})
+
+user2 = User.create!({
+  name: "joe",
+  email: "joe@joe.com",
+  password: "test"
+})
+
+
+puts "DONE CREATING NEW USER"
+
+##review
+
+puts "Creating Reviews!..."
+
+Review.create({
+  user_id: user1.id,
+  product_id: Product.last.id,
+  description: "It was okay. Worst fitting hat ever!",
+  rating: 1
+})
+
+Review.create!({
+  user_id: user1.id,
+  product_id: Product.last.id,
+  description: "Very good spitball shooter!",
+  rating: 10
+})
+
+Review.create!({
+  user_id: user1.id,
+  product_id: Product.last.id,
+  description: "I love it, but my wife hates it...she left me last night.",
+  rating: 10
+})
+
+Review.create!({
+  user_id: user1.id,
+  product_id: Product.last.id,
+  description: "The ultimate driving machine!",
+  rating: 8
+})
+
+Review.create!({
+  user_id: user1.id,
+  product_id: Product.last.id,
+  description: "Absolutely terrible! Should have gone for that sick racecar bed.",
+  rating: 10
+})
+
+
+puts "Done creating Reviews!"

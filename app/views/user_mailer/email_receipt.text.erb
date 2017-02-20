@@ -1,7 +1,7 @@
 
 Thank you for your order, <%= @order.email %>
 ===============================================
-
+Order Date:    <%= @order.created_at.to_formatted_s(:short) %>
 Your Order ID: <%= @order.id %>
 Stripe Charge: <%= @order.stripe_charge_id %>
 

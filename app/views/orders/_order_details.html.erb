@@ -20,7 +20,7 @@
                         <td>
                             Order ID:
                             <%= @order.id %><br>
-                            <%= @order.created_at %><br>
+                            <%= @order.created_at.to_formatted_s(:short) %><br>
                             <%= @order.email %>
                         </td>
                     </tr>

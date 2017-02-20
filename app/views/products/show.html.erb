@@ -3,7 +3,11 @@
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
   </header>
-
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |message| %>
+      <h1><span class="error"><%= message %></span></h1>
+    <% end %>
+  <% end %>
   <article class="product-detail">
 
     <div class="row">
@@ -27,5 +31,47 @@
     </div>
 
   </article>
+  <div class="reviews-container">
+    <h2>New Review</h2>
 
+      <%= form_for [@product, @review] do |f| %>
+        <div>
+          <%= f.text_area :description, size: "50x10", placeholder: "Type your new review here!" %>
+        </div>
+      Rating
+        <%= f.select :rating, [["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"]] %>
+        <%= f.submit %>
+      <% end %>
+  </div>
+
+  <% if @reviews.empty? %>
+  <h2>No Reviews Yet</h2>
+  <% else %>
+  <div class="reviews">
+    <div class="col-sm-4">
+      <h2>User Reviews</h2>
+      <% @reviews.reverse_each do |review| %>
+      <dl class="product-reviews">
+          <% if review.persisted? %>
+            <dt>User</dt>
+            <dd><%= review.user.name %></dd>
+            <dt>Rating</dt>
+            <dd><%= review.rating %>/10</dd>
+            <dt>Description</dt>
+            <dd><%= review.description %></dd>
+            <dt>Post Date</dt>
+            <dd><%= review.created_at.to_formatted_s(:short) %></dd>
+            <% if review.user.id == current_user.id %>
+            <span>
+              <%= link_to product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?"} do  %>
+              <%= fa_icon("trash") %> Delete
+              <% end %>
+              <% end %>
+            </span>
+        </dl>
+        <% end %>
+        <% end %>
+      </div>
+  </div>
+  <% end %>
 </section>

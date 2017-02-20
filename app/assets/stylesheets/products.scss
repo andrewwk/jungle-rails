@@ -83,4 +83,20 @@ main section.products-show {
       max-width: 100%;
     }
   }
+
+  .reviews-container, .reviews {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  dl.product-reviews {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 8px;
+  }
 }

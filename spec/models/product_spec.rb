@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
 
   context "Validations" do
     it { is_expected.to validate_presence_of(:name) }
@@ -11,6 +10,7 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:category_id) }
   end
 
+  # Test for success
   context "Product that is valid" do
     before(:each) do
       @category = Category.create(name: "Furniture")
@@ -41,9 +41,11 @@ RSpec.describe Product, type: :model do
     end
   end
 
+  # Tests for failure
   context "Product without a valid name" do
     it "Should not have a valid name" do
       @product = Product.create({
+        name: nil,
         price_cents: 10000,
         quantity: 100,
         category_id: 1
@@ -57,7 +59,7 @@ RSpec.describe Product, type: :model do
     it "Should not have a valid price" do
       @product = Product.create({
         name: "jet ski",
-        price_cents: "Matt Damon",
+        price_cents: nil,
         quantity: 100,
         category_id: 1
         })
@@ -70,6 +72,7 @@ RSpec.describe Product, type: :model do
       @product = Product.create({
         name: "jet ski",
         price_cents: 54321,
+        quantity: nil,
         category_id: 1
         })
       expect(@product.errors.full_messages).to include("Quantity is not a number")
@@ -81,19 +84,11 @@ RSpec.describe Product, type: :model do
       @product = Product.create({
         name: "jet ski",
         price_cents: 54321,
-        quantity: 123
+        quantity: 123,
+        category_id: nil
         })
       expect(@product.errors.full_messages).to include("Category can't be blank")
     end
   end
 
 end
-
-
-# belongs_to :category
-# has_many :reviews
-#
-# validates :name, presence: true
-# validates :price, presence: true
-# validates :quantity, presence: true
-# validates :category, presence: true

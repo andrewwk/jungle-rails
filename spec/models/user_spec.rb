@@ -1,15 +1,6 @@
 require 'rails_helper'
-
-# It must be created with a password and password_confirmation fields
-  # These need to match so you should have an example for where they are not the same
-    # Has secure password has a 72 character password limit, but no minimum
-    # Set class validation to 10 character minimum
-  # These are required when creating the model so you should also have an example for this
-
-# Emails must be unique and case sensitivity should not be taken into account (TEST@TEST.com should
-# not be allowed if test@test.COM is in the database)
-
-# Email, first name, and last name should also be required
+# require '/Users/andrewkim/lighthouse/lhl17projects/jungle-rails/app/models/user'
+require_relative '../../app/models/user'
 
 RSpec.describe User, type: :model do
 
@@ -18,7 +9,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to have_secure_password }
-    it { is_expected.to validate_length_of(:password).is_at_least(10) }
+    it { is_expected.to validate_length_of(:password).is_at_least(6) }
     it { is_expected.to have_many(:reviews) }
   end
 
@@ -84,6 +75,25 @@ RSpec.describe User, type: :model do
         password_confirmation: "thoristhebest"
         })
       expect(@user).to_not be_valid
+    end
+  end
+
+  context ".authenticate_with_credentials" do
+
+    before(:each) do
+      @user = User.create({
+        name: "test",
+        email: "test@test.com",
+        password: "password12345",
+        password_confirmation: "password12345"
+        })
+    end
+
+    it 'Use authenticate_with_credentials method to verify email and password valid' do
+      @email = "test@test.com"
+      @password = "password12345"
+      @user1 = User.authenticate_with_credentials(@email, @password)
+      expect(@user1).to eq(@user)
     end
   end
 

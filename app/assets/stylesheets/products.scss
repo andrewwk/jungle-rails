@@ -92,6 +92,13 @@ main section.products-show {
     justify-content: center;
   }
 
+  .no-reviews {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    align-items: center;
+  }
+
   dl.product-reviews {
     border: 1px solid black;
     display: flex;

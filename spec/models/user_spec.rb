@@ -1,5 +1,4 @@
 require 'rails_helper'
-# require '/Users/andrewkim/lighthouse/lhl17projects/jungle-rails/app/models/user'
 require_relative '../../app/models/user'
 
 RSpec.describe User, type: :model do
@@ -33,6 +32,7 @@ RSpec.describe User, type: :model do
       expect(@user1).to be_valid
     end
 
+    # Tests email uniqueness
     it "Should not save because the email is already assigned to a different user" do
       @user1 = User.new({
         name: "John Wick",
@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
 
   context "Password validations" do
 
-    it "Should have a valid password length and password confirmation, and save." do
+    it "Should have a valid password length, password confirmation, and save." do
       @user = User.create({
         name: "The Hulk",
         email: "hulk@smash.com",
@@ -96,14 +96,14 @@ RSpec.describe User, type: :model do
       expect(@user1).to eq(@user)
     end
 
-    it 'Use authenticate_with_credentials method to verify case insensitive email' do
+    it 'Use authenticate_with_credentials method to verify edge case: case insensitive email' do
       @email = "tESt@test.com"
       @password = "password12345"
       @user1 = User.authenticate_with_credentials(@email, @password)
       expect(@user1).to eq(@user)
     end
 
-    it 'Use authenticate_with_credentials method to verify case email with spaces' do
+    it 'Use authenticate_with_credentials method to verify edge case: email with spaces' do
       @email = " tESt@test.com "
       @password = "password12345"
       @user1 = User.authenticate_with_credentials(@email, @password)

@@ -25,7 +25,13 @@
           <dt>Quantity</dt>
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
-          <dd><%= @product.price %></dd>
+          <dd><%= number_to_currency(@product.price) %></dd>
+          <dt>Overall Rating</dt>
+            <% if @reviews.average(:rating) == nil %>
+            <dd>No Reviews Yet</dd>
+            <% else %>
+            <dd><%= @reviews.average(:rating) %>/10</dd>
+            <% end %>
         </dl>
       </div>
     </div>
@@ -33,7 +39,6 @@
   </article>
   <div class="reviews-container">
     <h2>New Review</h2>
-
       <%= form_for [@product, @review] do |f| %>
         <div>
           <%= f.text_area :description, size: "50x10", placeholder: "Type your new review here!" %>
@@ -45,7 +50,9 @@
   </div>
 
   <% if @reviews.empty? %>
-  <h2>No Reviews Yet</h2>
+    <div class="no-reviews">
+      <h2>No Reviews Yet</h2>
+    </div>
   <% else %>
   <div class="reviews">
     <div class="col-sm-4">

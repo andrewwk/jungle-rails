@@ -9,7 +9,17 @@
 <body>
 
   <%= render 'layouts/top_nav' %>
-
+  <div class="error-message">
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |message| %>
+        <h1>
+          <span class="error">
+            <%= message %>
+          </span>
+        </h1>
+      <% end %>
+    <% end %>
+  </div>
   <main class="container">
     <%= yield %>
   </main>

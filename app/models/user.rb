@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
 
-  validates :email, presence: true, case_sensitive: false, uniqueness: true
-  validates :password, length: { minimum: 6 }
+  validates :email,
+    case_sensitive: false,
+    uniqueness: { message: "already registered" },
+    presence: { message: "can't be blank" }
+
+  validates :password, length: { minimum: 1 }
   validates :name, presence: true
 
   has_secure_password

@@ -19,4 +19,13 @@
 // Global
 body {
   padding-top: 70px;
+
+  .error-message {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
 }

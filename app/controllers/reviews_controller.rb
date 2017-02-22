@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   before_filter :find_product
 
   def create
-    @review = Review.new(review_params)
+    @review = Review.new(review_params.merge({ product_id: params[:product_id] }) )
     @review.user = current_user
 
     if @review.save
@@ -38,14 +38,14 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def review_params
-    params.require(:review).permit(
-      :product_id,
-      :user_id,
-      :rating,
-      :description
-    )
-  end
+  # def review_params
+  #   params.require(:review).permit(
+  #     :product_id,
+  #     :user_id,
+  #     :rating,
+  #     :description
+  #   )
+  # end
   # find parent
   def find_product
     @product = Product.find(params[:product_id])
@@ -55,8 +55,8 @@ class ReviewsController < ApplicationController
   #   redirect_to "/login" unless current_user
   # end
   #
-  # def review_params
-  #   params.require(:review).permit(:description, :rating)
-  # end
+  def review_params
+    params.require(:review).permit(:description, :rating)
+  end
 
 end

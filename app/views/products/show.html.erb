@@ -3,11 +3,7 @@
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
   </header>
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |message| %>
-      <h1><span class="error"><%= message %></span></h1>
-    <% end %>
-  <% end %>
+
   <article class="product-detail">
 
     <div class="row">
@@ -68,7 +64,7 @@
             <dd><%= review.description %></dd>
             <dt>Post Date</dt>
             <dd><%= review.created_at.to_formatted_s(:short) %></dd>
-            <% if review.user.id == current_user.id %>
+            <% if current_user && review.user.id == current_user.id %>
             <span>
               <%= link_to product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?"} do  %>
               <%= fa_icon("trash") %> Delete

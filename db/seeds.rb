@@ -137,6 +137,8 @@ puts "DONE!"
 
 ##User
 
+User.destroy_all
+
 puts "CREATING NEW USER"
 
 user1 = User.create!({
@@ -158,38 +160,54 @@ puts "DONE CREATING NEW USER"
 
 puts "Creating Reviews!..."
 
+Review.destroy_all
+
 Review.create({
   user_id: user1.id,
   product_id: Product.last.id,
-  description: "It was okay. Worst fitting hat ever!",
+  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
   rating: 1
 })
 
 Review.create!({
-  user_id: user1.id,
+  user_id: user2.id,
   product_id: Product.last.id,
-  description: "Very good spitball shooter!",
+  description: "incididunt ut labore et dolore",
   rating: 10
 })
 
 Review.create!({
   user_id: user1.id,
-  product_id: Product.last.id,
-  description: "I love it, but my wife hates it...she left me last night.",
+  product_id: 4,
+  description: "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
   rating: 10
 })
 
 Review.create!({
-  user_id: user1.id,
-  product_id: Product.last.id,
-  description: "The ultimate driving machine!",
+  user_id: user2.id,
+  product_id: 2
+  description: "magna aliqua. Ut enim ad minim Duis aute irure dolor in reprehenderit in voluptate velit!",
   rating: 8
 })
 
 Review.create!({
   user_id: user1.id,
-  product_id: Product.last.id,
-  description: "Absolutely terrible! Should have gone for that sick racecar bed.",
+  product_id: 7
+  description: "magna aliqua. Ut enim ad minim Duis aute irure dolor in reprehenderit in voluptate velit!",
+  rating: 8
+})
+
+Review.create!({
+  user_id: user2.id,
+  product_id: 8
+  description: "magna aliqua. Ut enim ad minim Duis aute irure dolor in reprehenderit in voluptate velit!",
+  rating: 8
+})
+
+Review.create!({
+  user_id: user1.id,
+  product_id: 3,
+  description: "esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   rating: 10
 })
 
